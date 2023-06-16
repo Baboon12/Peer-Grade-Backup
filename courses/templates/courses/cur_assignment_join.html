@@ -1,0 +1,605 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Peer2Peer-Grading: {{ a.assignment_name }}</title>
+
+  <link rel="stylesheet" href="{% static 'assets1/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets1/Ionicons/css/ionicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets1/css/custom.css' %}">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/peergrade.png' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/slicknav.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/flaticon.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/gijgo.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/animate.min.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/fontawesome-all.min.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/slick.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/nice-select.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/style.css'%}" />
+  <style>
+    .underline {
+      border-top-style: hidden;
+      border-right-style: hidden;
+      border-left-style: hidden;
+      border-bottom-style: groove;
+      background-color: #ffffff;
+      height: 45px;
+      font-family: "Lucida Console", Courier, monospace;
+      width: 250px;
+      margin-bottom: 30px;
+    }
+
+    /*input[type="file"] {
+        display: none;
+    }*/
+
+    .feedback {
+      position: relative;
+    }
+
+    .comments {
+      width: 60%;
+      margin-top: 5%;
+      position: relative;
+      left: 18%;
+    }
+
+    .comments p:nth-child(even) {
+      width: 100%;
+      height: auto;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 10px;
+      color: black;
+    }
+
+    .comments p:nth-child(odd) {
+      width: 100%;
+      height: auto;
+      background-color: rgba(17, 6, 3, 0.39);
+      border-radius: 10px;
+      color: white;
+    }
+
+    .commentform {
+      position: relative;
+      width: 60%;
+    }
+
+
+    .custom-file-upload {
+      border-radius: 10px;
+      display: inline-block;
+      padding: 6px 12px;
+      /*height: 35px;
+        width: 75px;*/
+      cursor: pointer;
+      margin-bottom: 0px;
+    }
+
+    /*.unstyle {
+        border-radius: 10px;
+    }
+*/
+    /*.btn-warning {
+        text-decoration-color: white;
+    }*/
+    /*@media only screen and (min-width: 694px) and (max-width: 1059px){
+        .unstyle {
+            margin-left: 0px;
+        }
+    }*/
+    @media only screen and (max-width: 358px) {
+      .underline {
+        margin-right: 5px;
+      }
+    }
+
+    .hovering:hover {
+      background-color: blue;
+      color: white;
+    }
+
+    .login-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 400px;
+      padding: 40px;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 1);
+      box-sizing: border-box;
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 1);
+      border-radius: 10px;
+    }
+
+    .login-box h2 {
+      margin: 0 0 30px;
+      padding: 0;
+      color: #fff;
+      text-align: center;
+    }
+
+    .login-box .user-box {
+      position: relative;
+    }
+
+    .login-box .user-box input {
+      width: 100%;
+      padding: 10px 0;
+      font-size: 16px;
+      color: #fff;
+      margin-bottom: 30px;
+      border: none;
+      border-bottom: 1px solid #fff;
+      outline: none;
+      background: transparent;
+    }
+
+    .login-box .user-box label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 10px 0;
+      font-size: 16px;
+      color: #fff;
+      pointer-events: none;
+      transition: .5s;
+    }
+
+    .login-box .user-box input:focus~label,
+    .login-box .user-box input:valid~label {
+      top: -20px;
+      left: 0;
+      color: #03e9f4;
+      font-size: 12px;
+    }
+
+    .login-box form a {
+      position: relative;
+      display: inline-block;
+      padding: 10px 20px;
+      color: #03e9f4;
+      font-size: 16px;
+      text-decoration: none;
+      text-transform: uppercase;
+      overflow: hidden;
+      transition: .5s;
+      margin-top: 40px;
+      letter-spacing: 4px
+    }
+
+
+
+    .login-box a span {
+      position: absolute;
+      display: block;
+    }
+
+    .sample--button {
+      padding: 10rem;
+      box-sizing: border-box;
+      top: 50px;
+      left: 50px;
+
+    }
+
+    a {
+      color: #007bff;
+      position: relative;
+    }
+
+    a:hover {
+      color: #7300ff;
+    }
+
+    /*
+    DEMO STYLE
+*/
+
+    @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fafafa;
+    }
+
+    p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.1em;
+      font-weight: 300;
+      line-height: 1.7em;
+      color: #999;
+    }
+
+    a,
+    a:hover,
+    a:focus {
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .navbar {
+      padding: 15px 10px;
+      background: #fff;
+      border: none;
+      border-radius: 0;
+      margin-bottom: 40px;
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-btn {
+      box-shadow: none;
+      outline: none !important;
+      border: none;
+    }
+
+    .line {
+      width: 100%;
+      height: 1px;
+      border-bottom: 1px dashed #ddd;
+      margin: 40px 0;
+    }
+
+    /* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+    .wrapper {
+      display: flex;
+      width: 100%;
+      align-items: stretch;
+    }
+
+
+
+    /* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+    #content {
+      /* margin-left: 250px; */
+      width: 100%;
+      min-height: 100vh;
+      transition: all 0.3s;
+    }
+
+
+    /* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+    @media (max-width: 768px) {
+      #sidebar {
+        margin-left: -250px;
+      }
+
+      #sidebar.active {
+        margin-left: 0;
+      }
+
+      .sidebarCollapse span {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+
+<body style="overflow: visible;">
+
+  <div class="wrapper">
+    {% include "courses/sidebar.html" with created=classes joined=joined %}
+    <div id="content">
+
+      <header>
+        <!-- Header Start -->
+        <div class="header-area">
+
+          <div class="main-header">
+            <div class="header-top d-none d-lg-block">
+
+              <div class="container">
+                <div class="col-xl-12">
+                  <div class="row d-flex justify-content-between align-items-center">
+                    <i class="fa fa-bars sidebarCollapse" style="margin-right: 20px; font-size: 20px; color:black"></i>
+                    <div class="header-info-left">
+                      <ul>
+                        {% if user.is_authenticated %}
+                        <li>{{user.username}}</li>
+                        <li>{{user.email}}</li>
+                        {% else %}
+                        <li>Login to explore</li>
+                        {% endif %}
+                      </ul>
+                    </div>
+                    <div class="header-info-right">
+                      <ul>
+                        {% if user.is_authenticated %}
+                        <a style="color:blue;" href="{% url 'logout' %}"><i class="ti-user"></i>Logout</a>
+                        {% else %}
+                        <li>
+                          <a href="{% url 'login' %}"><i class="ti-user"></i>Login</a>
+                        </li>
+                        <li>
+                          <a href="{% url 'signup' %}"><i class="ti-lock"></i>Register</a>
+                        </li>
+                        {% endif %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="header-bottom header-sticky">
+
+              <div class="container">
+                <div class="menu-wrapper">
+                  <!-- Logo -->
+                  <div class="logo logo2">
+                    <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo/peergrade.png' %}"
+                        alt="Somaiya Vidyavihar University" width="180" heigth="60" /></a>
+                  </div>
+
+                  <div class="main-menu d-none d-lg-block">
+                    <nav>
+                      <ul id="navigation">
+                        <!-- <li><a href="{% url 'index' %}">Home</a></li> -->
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'homepage' %}">Create Classes</a></li>
+                        <li><a href="{% url 'joinclass' %}">Joined Classes</a></li>
+                        {% endif %}
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                      </ul>
+                    </nav>
+                  </div>
+
+                </div>
+                <!-- Mobile Menu -->
+                <div class="col-12">
+                  <div class="mobile_menu d-block d-lg-none"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Header End -->
+      </header>
+      <hr>
+      <div class="">
+        <div class="row-content row">
+          <div class="offset-md-2 col-sm-12 col-md-8">
+            <div style="display: flex;justify-content:space-between ;">
+              <div style="display: flex;justify-content: center;align-items: center;">
+                <h2 style="font-size: 18px;">Assignment Name:</h2>
+                <h3 style="text-transform:capitalize;font-size: 20px; "> {{ a.assignment_name }} </h3>
+              </div>
+
+              <h5>Max Marks: {{ a.points }}</h5>
+            </div>
+
+            <hr style="border: 1px solid gray; width: 100%;">
+          </div>
+
+
+
+        </div>
+        <div class="row-content row">
+          <div class="offset-md-2 col-md-4">
+
+
+
+            <!-- <form method="post">
+                  {% csrf_token %}
+                  <div style="display: flex;flex-direction: row;">
+                    <input
+                    style="margin-right: 10px;height: 30px;"
+                    size="25"
+                    name="youtube_link"
+                    placeholder="Enter youtube video link here"
+                    type="text"
+                  />
+                  <input type="submit" value="Upload link" class="btn btn-success" style="border-radius: 10px; height: 20px; padding: 15px 12px; margin-bottom: 15px;"/>
+                  </div>
+                  
+                </form> -->
+            {% if youtube_link %}
+            <h4>Submitted Video:</h4>
+            <iframe src="{{youtube_link}}" width="600" height="400" allowfullscreen="allowfullscreen"></iframe>
+            {% endif %}
+            {% if doc_link %}
+            <h4>Submitted File:</h4>
+            <a href="{{doc_link}}" target="_blank" style="color: #2f2586; font-size: large;">Click here</a> to view
+            file.<br><br>
+            <!-- <iframe src="{{doc_link}}" width="600" height="600" allowfullscreen="allowfullscreen"></iframe> -->
+            {% endif %}
+            <br>
+            <div style="display: flex;">
+              <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input style="margin-right: 10px;height: 30px;" size="25" name="youtube_link"
+                  placeholder="Enter youtube video link here" type="text" />
+                <input style="margin-right: 10px;height: 30px;" size="25" name="doc_link"
+                  placeholder="Enter Google doc link here" type="url" pattern="https://docs.google.com.*" />
+                <!-- <br>
+                  <br> -->
+                <!-- <div>
+                        <label>Upload Multiple Files</label>
+                        <input class="unstyle" type="file" name="uploaded_file" multiple required><br>
+                    </div><br> -->
+                <input type="hidden" name="act" value="1">
+
+                <!-- <div> -->
+                <input type="hidden" name="del_sub" value="-1">
+                {% if edit %}
+                <button class="btn btn-success" type="submit"
+                  style="border-radius: 10px; height: 35px; padding: 20px 24px; margin-bottom: 15px;">Edit</button>
+                {% else %}
+                <button class="btn btn-success" type="submit"
+                  style="border-radius: 10px; height: 35px; padding: 20px 24px; margin-bottom: 15px;">Submit</button>
+                {% endif %}
+                <!-- </div> -->
+                <div class='feedback'>
+                  {% if flag is True %}
+                  <h4><a href="{% url 'view_feedback' a.pk %}" style="color: #3218a8;">See Feedback >></a></h4>
+                  {% endif %}
+                </div>
+            </div>
+            </form>
+
+
+
+
+          </div>
+          {% if files %}
+          <div class="col-sm-12 col-md-4">
+            <!-- <h4>Submitted Files:</h4>
+          {% for file in files %}
+          <h5>Download here: <a href="{{ file.sub.url }}">{{ file.sub.url }}</a></h5>
+          {% endfor %} -->
+            <!-- Marks Section -->
+            {% if a.grading_type is False %}
+            {% if teacher_marks is not None %}
+            <h4>Marks obtained by teacher: {{ teacher_marks }}/{{ t_points }}</h4>
+            {% else %}
+            <h4>Not graded by Teacher</h4>
+            {% endif %}
+            {% if marks is not None %}
+            <h4>Marks obtained by peer: {{ marks }}/{{ t_points }}</h4>
+            {% else %}
+            <h4>Not graded by Teacher</h4>
+            {% endif %}
+            {% if total_marks is not None %}
+            <h4>Total Marks: {{ total_marks }}/{{ t_points }}</h4>
+            {% else %}
+            <h4>Total marks not calculated yet</h4>
+            {% endif %}
+            {% else %}
+            <h4>Marks obtained: {{ sub.marks }}/{{ a.points }}</h4>
+            {% endif %}
+          </div>
+          {% endif %}
+
+          <div class='comments'>
+            {% if sub %}
+            <form method="post" action="{% url 'cur_assignment_join' a.pk %}" class='commentform'>
+              {% csrf_token %}
+              <div style="display: flex;justify-content: center;align-items: left;">
+                <input type="text" name="comment" autocomplete="off" size="60" placeholder="Enter your comment here...">
+                <button type="submit"
+                  style="background-color: #2f2586;height: 2.5rem;width: 4rem;border-radius: 10%;border: none;outline: none;margin-left: 1rem;"
+                  onmouseover="this.style.background='blue'" onmouseout="this.style.background='#2f2586'">Post</button>
+              </div>
+            </form>
+
+            <h2>Comments</h2>
+
+            {% for comment in comments %}
+            <p>{{ comment.comment_user.username }} : <br>{{comment.text}}<br>
+              {{comment.comment_date}}</p>
+            {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+
+<!-- <footer>
+  <div class="footer-area footer-bg">
+    <div class="container">
+      <div class="footer-top py-5">
+        <div class="footer-heading">
+          <h4 style="color: white; padding: 10px 0; text-align: center;">Connect Us</h4>
+          <div class="footer-social py-2" style="text-align: center;">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+          </div>
+
+          <div class="address py-3" style="text-align: center;">
+            <h5 style="color: white;"><i class="ti-home px-2"></i>K J Somaiya College of Engineering</h5>
+          </div>
+        </div>
+      </div>
+</footer> -->
+<footer>
+  <div class="footer-area footer-bg">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-heading">
+          <h4 style="color: white; padding: 10px 0; text-align: center;">Connect Us</h4>
+          <div class="footer-social py-2" style="text-align: center;">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+          </div>
+          <div class="address py-3" style="text-align: center;">
+            <h5 style="color: white;"><i class="ti-home px-2"></i>K J Somaiya College of Engineering</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="back-top">
+  <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
+</div>
+</div>
+</div>
+<!-- JS here -->
+<script>
+  $('#tag_cloud').load(' #tag_cloud', function () {
+    $(this).children().unwrap()
+  })
+</script>
+
+<script src="{% static './assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+<!-- Jquery, Popper, Bootstrap -->
+<script src="{% static './assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+<script src="{% static './assets/js/popper.min.js' %}"></script>
+<script src="{% static './assets/js/bootstrap.min.js' %}"></script>
+<!-- Jquery Mobile Menu -->
+<script src="{% static './assets/js/jquery.slicknav.min.js' %}"></script>
+
+<!-- Jquery Slick , Owl-Carousel Plugins -->
+<script src="{% static './assets/js/owl.carousel.min.js' %}"></script>
+<script src="{% static './assets/js/slick.min.js' %}"></script>
+<!-- One Page, Animated-HeadLin -->
+<script src="{% static './assets/js/wow.min.js' %}"></script>
+<script src="{% static './assets/js/animated.headline.js' %}"></script>
+<script src="{% static './assets/js/jquery.magnific-popup.js' %}"></script>
+
+<!-- Date Picker -->
+<script src="{% static './assets/js/gijgo.min.js' %}"></script>
+<!-- Nice-select, sticky -->
+<script src="{% static './assets/js/jquery.nice-select.min.js' %}"></script>
+<script src="{% static './assets/js/jquery.sticky.js' %}"></script>
+
+<!-- counter , waypoint -->
+<script src="{% static './assets/js/jquery.counterup.min.js' %}"></script>
+<script src="{% static './assets/js/waypoints.min.js' %}"></script>
+
+<!-- contact js -->
+<script src="{% static './assets/js/contact.js' %}"></script>
+<script src="{% static './assets/js/jquery.form.js' %}"></script>
+<script src="{% static './assets/js/jquery.validate.min.js' %}"></script>
+<script src="{% static './assets/js/mail-script.js' %}"></script>
+<script src="{% static './assets/js/jquery.ajaxchimp.min.js' %}"></script>
+
+<!-- Jquery Plugins, main Jquery -->
+<script src="{% static './assets/js/plugins.js' %}"></script>
+<script src="{% static './assets/js/main.js' %}"></script>
+</body>
+</html>
+{% endblock %}

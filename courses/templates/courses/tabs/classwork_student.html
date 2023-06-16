@@ -1,0 +1,51 @@
+{% load static %}
+
+<div style="padding: 0 10px; display: flex; align-items: baseline; justify-content: flex-start;">
+    <i class=" fa fa-clipboard" style="font-size: 20px;"></i>
+    <h4 style="margin-top: 20px; padding: 5px 10px; color: grey; margin-left: 0px;">Assignments</h4>
+</div>
+
+<hr style="display: block; height: 1px;
+  border: 0; border-top: 2px solid #3218a8;
+  margin: 0.1em 0; padding: 0;">
+<ul class="list-unstyled components">
+
+    {% for a in assignments %}
+    <li>
+        <a href="{% url 'cur_assignment_join' a.pk %}">
+            <div style="display: flex; align-items: center;justify-content: space-between; padding: 3px;">
+                <div style="display: flex; align-items: center;justify-content: center;">
+                    <div style="  display: inline-block;
+                    vertical-align: middle; 
+                    position: relative;
+                    background-color:#3218a8;
+                    color: #fff;
+                    border-radius: 50%;
+                    height: 48px;
+                    width: 48px;
+                    margin-right: 10px;">
+                        <div class="avatar__letters">
+                            <!-- The letters -->
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+                    </div>
+                    <h5>{{a.assignment_name}}</h5>
+                    <!--<a href="{% url 'peers_assigned' a.pk %}" style="margin: 0; padding: 0;">Peer</a>-->
+                </div>
+            </a>
+                <h5 style="padding-left: 20px;"> {{a.points}} mks</h5>
+                <h5 style="padding-left: 20px;"><a id="review-peers" href="{% url 'peers_assigned' a.pk %}"
+                        class="read-more1">Peer Review</a>
+</h5>
+                <h6 style="padding-left: 20px; color: gray;">Due {{a.due_date}}</h6>
+                
+                
+            </div>
+        
+    </li>
+    {% empty %}
+    <div class="not-found">
+        <h5>No Assignments Created</h5>
+    </div>
+    {% endfor %}
+</ul>

@@ -1,0 +1,813 @@
+<!--Edited by Hussein/Nayan-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Peer2Peer-Grading: {{ cur_class.class_name }}</title>
+  <link rel="stylesheet" href="{% static 'assets1/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets1/Ionicons/css/ionicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets1/css/custom.css' %}">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/peergrade.png' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/slicknav.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/flaticon.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/gijgo.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/animate.min.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/fontawesome-all.min.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/slick.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/nice-select.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/style.css'%}" />
+  <style>
+    .hover:hover {
+      background-color: #2d3092;
+    }
+
+    #review-peers {
+      color: rgb(109, 94, 94);
+
+    }
+
+    #review-peers:hover {
+      color: rgb(29, 29, 216);
+      text-decoration: bold;
+      font-weight: 600;
+    }
+
+    /* .size{
+      transform: all;
+    } */
+    .size:hover {
+      transform: scale(1.1);
+    }
+    
+    .hovering:hover {
+      background-color: blue;
+      color: white;
+    }
+
+    .login-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 400px;
+      padding: 40px;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 1);
+      box-sizing: border-box;
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 1);
+      border-radius: 10px;
+    }
+
+    .login-box h2 {
+      margin: 0 0 30px;
+      padding: 0;
+      color: #fff;
+      text-align: center;
+    }
+
+    .login-box .user-box {
+      position: relative;
+    }
+
+    .login-box .user-box input {
+      width: 100%;
+      padding: 10px 0;
+      font-size: 16px;
+      color: #fff;
+      margin-bottom: 30px;
+      border: none;
+      border-bottom: 1px solid #fff;
+      outline: none;
+      background: transparent;
+    }
+
+    .login-box .user-box label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 10px 0;
+      font-size: 16px;
+      color: #fff;
+      pointer-events: none;
+      transition: .5s;
+    }
+
+    .login-box .user-box input:focus~label,
+    .login-box .user-box input:valid~label {
+      top: -20px;
+      left: 0;
+      color: #03e9f4;
+      font-size: 12px;
+    }
+
+    .login-box form a {
+      position: relative;
+      display: inline-block;
+      padding: 10px 20px;
+      color: #03e9f4;
+      font-size: 16px;
+      text-decoration: none;
+      text-transform: uppercase;
+      overflow: hidden;
+      transition: .5s;
+      margin-top: 40px;
+      letter-spacing: 4px
+    }
+
+
+
+    .login-box a span {
+      position: absolute;
+      display: block;
+    }
+
+    .sample--button {
+      padding: 10rem;
+      box-sizing: border-box;
+      top: 50px;
+      left: 50px;
+
+    }
+
+    a {
+      color: #007bff;
+      position: relative;
+    }
+
+    a:hover {
+      color: #7300ff;
+    }
+
+    /*
+    DEMO STYLE
+*/
+
+    @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fafafa;
+    }
+
+    p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.1em;
+      font-weight: 300;
+      line-height: 1.7em;
+      color: #999;
+    }
+
+    a,
+    a:hover,
+    a:focus {
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .navbar {
+      padding: 15px 10px;
+      background: #fff;
+      border: none;
+      border-radius: 0;
+      margin-bottom: 40px;
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-btn {
+      box-shadow: none;
+      outline: none !important;
+      border: none;
+    }
+
+    .line {
+      width: 100%;
+      height: 1px;
+      border-bottom: 1px dashed #ddd;
+      margin: 40px 0;
+    }
+
+    /* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+    .wrapper {
+      display: flex;
+      width: 100%;
+      align-items: stretch;
+    }
+
+
+
+    /* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+    #content {
+      /* margin-left: 250px; */
+      width: 100%;
+      min-height: 100vh;
+      transition: all 0.3s;
+    }
+
+
+    /* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+    @media (max-width: 768px) {
+      #sidebar {
+        margin-left: -250px;
+      }
+
+      #sidebar.active {
+        margin-left: 0;
+      }
+
+      .sidebarCollapse span {
+        display: none;
+      }
+    }
+    
+
+    .content-table {
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 0.9em;
+      min-width: 400px;
+      border-radius: 5px 5px 0 0;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .content-table thead tr {
+      background-color: #3218a8;
+      color: #ffffff;
+      text-align: left;
+      font-weight: bold;
+    }
+
+    .content-table th,
+    .content-table td {
+      padding: 12px 15px;
+    }
+
+    .content-table tbody tr {
+      border-bottom: 1px solid #dddddd;
+    }
+
+    .content-table tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+    }
+
+    .content-table tbody tr:last-of-type {
+      border-bottom: 2px solid #3218a8;
+    }
+
+    .content-table tbody tr.active-row {
+      font-weight: bold;
+      color: #3218a8;
+    }
+
+    #button-wrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #assign-peers {
+      color: rgb(109, 94, 94);
+
+    }
+
+    #assign-peers:hover {
+      color: rgb(29, 29, 216);
+      text-decoration: bold;
+      font-weight: 600;
+    }
+
+    .size:hover {
+      transform: scale(1.1);
+    }
+
+    /*Tab Styles*/
+
+
+    .project-tab #tabs {
+      background: #3218a8;
+      color: #eee;
+    }
+
+    .project-tab #tabs h6.section-title {
+      color: #eee;
+    }
+
+    .project-tab #tabs .nav-tabs .nav-item.show .nav-link,
+    .nav-tabs .nav-link.active {
+      color: #3218a8;
+      background-color: transparent;
+      border-color: transparent transparent #f3f3f3;
+      border-bottom: 3px solid !important;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .project-tab .nav-link {
+      border: 1px solid transparent;
+      border-top-left-radius: .25rem;
+      border-top-right-radius: .25rem;
+      color: black;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .project-tab .nav-link:hover {
+      border: none;
+    }
+
+    .project-tab thead {
+      background: #f3f3f3;
+      color: #333;
+    }
+
+    .project-tab a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+    }
+
+
+
+    .hovering:hover {
+      background-color: blue;
+      color: white;
+    }
+
+    .login-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 400px;
+      padding: 40px;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 1);
+      box-sizing: border-box;
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 1);
+      border-radius: 10px;
+    }
+
+    .login-box h2 {
+      margin: 0 0 30px;
+      padding: 0;
+      color: #fff;
+      text-align: center;
+    }
+
+    .login-box .user-box {
+      position: relative;
+    }
+
+    .login-box .user-box input {
+      width: 100%;
+      padding: 10px 0;
+      font-size: 16px;
+      color: #fff;
+      margin-bottom: 30px;
+      border: none;
+      border-bottom: 1px solid #fff;
+      outline: none;
+      background: transparent;
+    }
+
+    .login-box .user-box label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 10px 0;
+      font-size: 16px;
+      color: #fff;
+      pointer-events: none;
+      transition: .5s;
+    }
+
+    .login-box .user-box input:focus~label,
+    .login-box .user-box input:valid~label {
+      top: -20px;
+      left: 0;
+      color: #03e9f4;
+      font-size: 12px;
+    }
+
+    .login-box form a {
+      position: relative;
+      display: inline-block;
+      padding: 10px 20px;
+      color: #03e9f4;
+      font-size: 16px;
+      text-decoration: none;
+      text-transform: uppercase;
+      overflow: hidden;
+      transition: .5s;
+      margin-top: 40px;
+      letter-spacing: 4px
+    }
+
+
+
+    .login-box a span {
+      position: absolute;
+      display: block;
+    }
+
+    .sample--button {
+      padding: 10rem;
+      box-sizing: border-box;
+      top: 50px;
+      left: 50px;
+
+    }
+
+    a {
+      color: #007bff;
+      position: relative;
+    }
+
+    a:hover {
+      color: #7300ff;
+    }
+
+    /*
+    DEMO STYLE
+*/
+
+    @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fafafa;
+    }
+
+    p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.1em;
+      font-weight: 300;
+      line-height: 1.7em;
+      color: #999;
+    }
+
+    a,
+    a:hover,
+    a:focus {
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .navbar {
+      padding: 15px 10px;
+      background: #fff;
+      border: none;
+      border-radius: 0;
+      margin-bottom: 40px;
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-btn {
+      box-shadow: none;
+      outline: none !important;
+      border: none;
+    }
+
+    .line {
+      width: 100%;
+      height: 1px;
+      border-bottom: 1px dashed #ddd;
+      margin: 40px 0;
+    }
+
+    /* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+    .wrapper {
+      display: flex;
+      width: 100%;
+      align-items: stretch;
+    }
+
+
+
+    /* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+    #content {
+      /* margin-left: 250px; */
+      width: 100%;
+      min-height: 100vh;
+      transition: all 0.3s;
+    }
+
+
+    /* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+    @media (max-width: 768px) {
+      #sidebar {
+        margin-left: -250px;
+      }
+
+      #sidebar.active {
+        margin-left: 0;
+      }
+
+      .sidebarCollapse span {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body style="overflow: visible;">
+  <div class="wrapper">
+    {% include "courses/sidebar.html" with created=classes joined=joined %}
+    <div id="content">
+
+  <header>
+    <!-- Header Start -->
+    <div class="header-area">
+      <div class="main-header">
+        <div class="header-top d-none d-lg-block">
+
+          <div class="container">
+            <div class="col-xl-12">
+              <div class="row d-flex justify-content-between align-items-center">
+                <i class="fa fa-bars sidebarCollapse" style="margin-right: 20px; font-size: 20px; color:black"></i>
+                <div class="header-info-left">
+                  <ul>
+                    {% if user.is_authenticated %}
+                    <li>{{user.username}}</li>
+                    <li>{{user.email}}</li>
+                    {% else %}
+                    <li>Login to explore</li>
+                    {% endif %}
+                  </ul>
+                </div>
+                <div class="header-info-right">
+                  <ul>
+                    {% if user.is_authenticated %}
+                    <a style="color:blue;" href="{% url 'logout' %}"><i class="ti-user"></i>Logout</a>
+                    {% else %}
+                    <li>
+                      <a href="{% url 'login' %}"><i class="ti-user"></i>Login</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'signup' %}"><i class="ti-lock"></i>Register</a>
+                    </li>
+                    {% endif %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="header-bottom header-sticky">
+
+          <div class="container">
+            <div class="menu-wrapper">
+              <!-- Logo -->
+              <div class="logo logo2">
+                <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo/peergrade.png' %}"
+                    alt="Somaiya Vidyavihar University" width="180" heigth="60" /></a>
+              </div>
+
+              <div class="main-menu d-none d-lg-block">
+                <nav>
+                  <ul id="navigation">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'homepage' %}">create Classes</a></li>
+                    <li><a href="{% url 'joinclass' %}">Joined Classes</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                  </ul>
+                </nav>
+              </div>
+
+            </div>
+            <!-- Mobile Menu -->
+            <div class="col-12">
+              <div class="mobile_menu d-block d-lg-none"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Header End -->
+  </header>
+  <main style="background: white;" class="py-5">
+    <section id="team-page">
+      <div class="container">
+        <div class="head-title d-flex align-items-center justify-content-between my-3">
+          <h4 style="font-size: 50px" class="text-black">{{ cur_class.class_name }}</h4>
+          <h6 style="font-size: 20px" class="text-black">{{ cur_class.class_description }}</h6>
+          <form method="post" action="{% url 'joinclass'%}">
+            {% csrf_token %}
+            <input type="hidden" name="l_class" value="{{class_id}}">
+            <button style="border-radius: 12.5px" class="btn btn-danger" type="submit">Leave Class</button>
+          </form>
+        </div>
+        
+        <div style="border-bottom: 1px solid; margin: 20px 0px"></div>
+        <div style="display: flex; align-items: center; justify-content: center" class="project-tab">
+          <ul style="width: 80%;" class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a style="font-size: 20px;" class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                aria-controls="home" aria-selected="true">Classwork</a>
+            </li>
+            <li class="nav-item">
+              <a style="font-size: 20px;" class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                aria-controls="profile" aria-selected="false">People</a>
+            </li>
+            <li class="nav-item">
+              <a style="font-size: 20px;" class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                aria-controls="contact" aria-selected="false">Notices</a>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="container" style="width: 70%;">
+          <div class="tab-content" id="myTabContent" style="margin: 0 auto;">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+              {% include "courses/tabs/classwork_student.html" with assignments=assignments %}
+              
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              {% include "courses/tabs/people.html" with students=students teachers=teachers %}
+            </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+              {% include "courses/tabs/notices.html" with notice=notice %}
+            </div>
+          </div>
+        </div>
+        <!--<div class="categories-area" style="padding-top: 25px;">-->
+        <!--  <div class="container">-->
+        <!--    <div class="row row-content">-->
+        <!--      <div class="col-md-12 col-sm-12" style="padding: 0px 0px;">-->
+                <!-- {% for a in assignments %}
+                <div class="single-cat float-left"
+                  style="width: 30%; margin: 0px 0px 20px 30px; padding: 10px; height: 350px">
+                  <div style="text-align: center;" class="cat-icon mb-3"><a href="{% url 'cur_assignment_create' a.pk %}">
+                      <span class="flaticon-web-design"></span></a>
+                  </div>
+                  <div style="text-align: center;word-wrap: break-word;" class="cat-cap">
+                    <h5 style="text-transform: uppercase; text-decoration: underline;" class="size">
+                      <a href="{% url 'cur_assignment_create' a.pk %}">{{a.assignment_name}}</a>
+                    </h5>
+                    <p style="margin-bottom: 17px;">Max Points: {{a.points}}</p>
+                    <p style="margin-bottom: 15px;">Due: {{a.due_date}}</p>
+                    {% if a.grading_type is False %}
+                    <button style="border: none;outline: none;">
+                      <a style="margin-bottom: 17px;" id="assign-peers"
+                        href="{% url 'assign_peers' a.pk class_id %}">Assign
+                        Peers</a>
+                    </button>
+                    {% endif %} -->
+                <!-- <a href="{% url 'cur_assignment_create' a.pk %}" class="read-more1"><span>Peers <i class="fa fa-graduation-cap"></i></span></a> -->
+              <!--</div>-->
+            <!--</div>-->
+            <!--{% endfor %}-->
+  
+            <!-- {% for n in notice %}
+                <div class="single-cat float-left"
+                  style="width: 30%; margin: 0px 0px 20px 30px; padding: 10px; height: 350px">
+                  <div style="text-align: center;" class="cat-icon mb-3"><a href="{% url 'cur_notice' n.pk %}">
+                      <span class="flaticon-web-design"></span></a>
+                  </div>
+                  <div style="text-align: center;" class="cat-cap">
+                    <h5 style="text-transform: uppercase; text-decoration: underline;"><a
+                        href="{% url 'cur_notice' n.pk %}">{{n.notice_name}}</a></h5>
+                    <p style="margin-bottom: 15px;">Posted On: {{n.created_on}}</p>
+                  </div>
+                </div>
+                {% endfor %} -->
+        <!--  </div>-->
+        <!--</div>-->
+        <!--<div class="categories-area" style="padding-top: 25px;">-->
+        <!--  <div class="container">-->
+        <!--    <div class="row row-content">-->
+        <!--      <div class="col-md-12 col-sm-12" style="padding: 0px 0px;">-->
+        <!--        {% for a in assignments %}-->
+        <!--        <div class="single-cat float-left"-->
+        <!--          style="width: 30%; margin: 0px 0px 20px 30px; padding: 10px; height: 350px;word-wrap: break-word;">-->
+        <!--          <div style="text-align: center;" class="cat-icon mb-3"><a href="{% url 'cur_assignment_join' a.pk %}">-->
+        <!--              <span class="flaticon-web-design"></span></a>-->
+        <!--          </div>-->
+        <!--          <div style="text-align: center;" class="cat-cap">-->
+        <!--            <h5 style="text-transform: uppercase; text-decoration: underline;" class="size"><a-->
+        <!--                href="{% url 'cur_assignment_join' a.pk %}">{{a.assignment_name}}</a></h5>-->
+        <!--            <p style="margin-bottom: 17px;">Max Points: {{a.points}}</p>-->
+        <!--            <p style="margin-bottom: 15px;">Due: {{a.due_date}}</p>-->
+        <!--            {% if a.grading_type is False %}-->
+        <!--            <button style="border: none;outline: none;">-->
+        <!--              <a style="border-bottom: 1px solid" id="review-peers" href="{% url 'peers_assigned' a.pk %}"-->
+        <!--                class="read-more1"><span>To Review Peers <i class="fa fa-graduation-cap"></i>>></span></a>-->
+        <!--            </button>-->
+        <!--            {% endif %}-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--        {% endfor %}-->
+
+                <!--{% for n in notice %}-->
+                <!--<div class="single-cat float-left"-->
+                <!--  style="width: 30%; margin: 0px 0px 20px 30px; padding: 10px; height: 350px">-->
+                <!--  <div style="text-align: center;" class="cat-icon mb-3"><a href="{% url 'cur_notice' n.pk %}">-->
+                <!--      <span class="flaticon-web-design"></span></a>-->
+                <!--  </div>-->
+                <!--  <div style="text-align: center;" class="cat-cap">-->
+                <!--    <h5 style="text-transform: uppercase; text-decoration: underline;"><a-->
+                <!--        href="{% url 'cur_notice' n.pk %}">{{n.notice_name}}</a></h5>-->
+                <!--    <p style="margin-bottom: 15px;">Posted On: {{n.created_on}}</p>-->
+                <!--  </div>-->
+                <!--</div>-->
+                <!--{% endfor %}-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div> -->
+      </div>
+    </section>
+  </main>
+
+ 
+  <!-- Scroll Up -->
+  <div id="back-top">
+    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+  </div>
+  
+  <script src="{% static './assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+  <!-- Jquery, Popper, Bootstrap -->
+  <script src="{% static './assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+  <script src="{% static './assets/js/popper.min.js' %}"></script>
+  <script src="{% static './assets/js/bootstrap.min.js' %}"></script>
+  <!-- Jquery Mobile Menu -->
+  <script src="{% static './assets/js/jquery.slicknav.min.js' %}"></script>
+
+  <!-- Jquery Slick , Owl-Carousel Plugins -->
+  <script src="{% static './assets/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static './assets/js/slick.min.js' %}"></script>
+  <!-- One Page, Animated-HeadLin -->
+  <script src="{% static './assets/js/wow.min.js' %}"></script>
+  <script src="{% static './assets/js/animated.headline.js' %}"></script>
+  <script src="{% static './assets/js/jquery.magnific-popup.js' %}"></script>
+
+  <!-- Date Picker -->
+  <script src="{% static './assets/js/gijgo.min.js' %}"></script>
+  <!-- Nice-select, sticky -->
+  <script src="{% static './assets/js/jquery.nice-select.min.js' %}"></script>
+  <script src="{% static './assets/js/jquery.sticky.js' %}"></script>
+
+  <!-- counter , waypoint -->
+  <script src="{% static './assets/js/jquery.counterup.min.js' %}"></script>
+  <script src="{% static './assets/js/waypoints.min.js' %}"></script>
+
+  <!-- contact js -->
+  <script src="{% static './assets/js/contact.js' %}"></script>
+  <script src="{% static './assets/js/jquery.form.js' %}"></script>
+  <script src="{% static './assets/js/jquery.validate.min.js' %}"></script>
+  <script src="{% static './assets/js/mail-script.js' %}"></script>
+  <script src="{% static './assets/js/jquery.ajaxchimp.min.js' %}"></script>
+
+  <!-- Jquery Plugins, main Jquery -->
+  <script src="{% static './assets/js/plugins.js' %}"></script>
+  <script src="{% static './assets/js/main.js' %}"></script>
+</div></div>
+</body>
+<footer>
+  <div class="footer-area footer-bg">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-heading">
+          <h4 style="color: white; padding: 10px 0; text-align: center;">Connect Us</h4>
+          <div class="footer-social py-2" style="text-align: center;">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+          </div>
+
+          <div class="address py-3" style="text-align: center;">
+            <h5 style="color: white;"><i class="ti-home px-2"></i>K J Somaiya College of Engineering</h5>
+          </div>
+        </div>
+      </div>
+</footer>
+</html>

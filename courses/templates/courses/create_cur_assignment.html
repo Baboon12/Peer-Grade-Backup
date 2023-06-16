@@ -1,0 +1,186 @@
+{% extends 'courses/nav.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Peer2Peer2-Grading : {{ assignment.assignment_name }}</title>
+  <style>
+    * {
+      font-family: "Sen", sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      color: #030431;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 10px;
+    }
+
+    th {
+      background: #2d3092;
+      color: white;
+    }
+
+    table tr td:first-child {
+      border-bottom-left-radius: 10px;
+    }
+
+    table tr td:last-child {
+      border-bottom-right-radius: 10px;
+    }
+
+    table tr td:first-child {
+      border-top-left-radius: 10px;
+    }
+
+    table tr td:last-child {
+      border-top-right-radius: 10px;
+    }
+
+    table th:first-child {
+      border-bottom-left-radius: 10px;
+      border-top-left-radius: 10px;
+    }
+
+    table th:last-child {
+      border-bottom-right-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    a {
+      color: #007bff;
+    }
+
+    a:hover {
+      color: #7300ff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row-content row">
+      <div class="offset-md-2 col-sm-12 col-md-8 text-center">
+        <div class="offset-md-4 col-md-4">
+          <h5 style="font-size: 14px;">Assignment Name:</h5>
+        </div>
+        <div class="offset-md-4 offset-sm-2 col-sm-8 col-md-4">
+          <h1 style="text-transform:capitalize;"> {{ assignment.assignment_name }} </h1>
+          <h5>Teacher Ratio: {{ teacher_ratio }}</h5>
+        </div>
+        <hr style="border: 1px solid gray; width: 100%;">
+      </div>
+    </div>
+    <div class="row-content row">
+      <div class="offset-md-2 col-sm-12 col-md-8">
+        <table>
+          <tr>
+            <th>Username</th>
+            <th>Submission Date</th>
+            <th>Marks</th>
+            <th>Remark</th>
+            <th>Submission</th>
+          </tr>
+          {% for submission in submissions %}
+          <tr>
+            <td>{{submission.student.username}}</td>
+            <td>{{ submission.sub_date }}</td>
+            <td>{{ submission.marks }}</td>
+            <td>{{ submission.remark }}</td>
+            <td><a href="{% url 'cur_student_submission' submission.pk %}">Assignment</a></td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+
+    <form method="post" action="{% url 'cur_assignment_gradesheet' assignment_id  %}">
+      {% csrf_token %}
+      <div style="text-align: center; margin: 40px;">
+        <button class="btn btn-warning radius" type="submit" style="margin: auto;">View Grades <i class="fa fa-eye"
+            style="color: white; padding-left:10px;"></i></button>
+      </div>
+    </form>
+
+  </div>
+</body>
+<footer>
+  <div class="footer-area footer-bg">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-heading">
+          <h4 style="color: white; padding: 10px 0; text-align: center;">Connect Us</h4>
+          <div class="footer-social py-2" style="text-align: center;">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+          </div>
+
+          <div class="address py-3" style="text-align: center;">
+            <h5 style="color: white;"><i class="ti-home px-2"></i>K J Somaiya College of Engineering</h5>
+          </div>
+        </div>
+      </div>
+</footer>
+<!-- Scroll Up -->
+<div id="back-top">
+  <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
+
+<!-- JS here -->
+
+<script src="{% static './assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+<!-- Jquery, Popper, Bootstrap -->
+<script src="{% static './assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+<script src="{% static './assets/js/popper.min.js' %}"></script>
+<script src="{% static './assets/js/bootstrap.min.js' %}"></script>
+<!-- Jquery Mobile Menu -->
+<script src="{% static './assets/js/jquery.slicknav.min.js' %}"></script>
+
+<!-- Jquery Slick , Owl-Carousel Plugins -->
+<script src="{% static './assets/js/owl.carousel.min.js' %}"></script>
+<script src="{% static './assets/js/slick.min.js' %}"></script>
+<!-- One Page, Animated-HeadLin -->
+<script src="{% static './assets/js/wow.min.js' %}"></script>
+<script src="{% static './assets/js/animated.headline.js' %}"></script>
+<script src="{% static './assets/js/jquery.magnific-popup.js' %}"></script>
+
+<!-- Date Picker -->
+<script src="{% static './assets/js/gijgo.min.js' %}"></script>
+<!-- Nice-select, sticky -->
+<script src="{% static './assets/js/jquery.nice-select.min.js' %}"></script>
+<script src="{% static './assets/js/jquery.sticky.js' %}"></script>
+
+<!-- counter , waypoint -->
+<script src="{% static './assets/js/jquery.counterup.min.js' %}"></script>
+<script src="{% static './assets/js/waypoints.min.js' %}"></script>
+
+<!-- contact js -->
+<script src="{% static './assets/js/contact.js' %}"></script>
+<script src="{% static './assets/js/jquery.form.js' %}"></script>
+<script src="{% static './assets/js/jquery.validate.min.js' %}"></script>
+<script src="{% static './assets/js/mail-script.js' %}"></script>
+<script src="{% static './assets/js/jquery.ajaxchimp.min.js' %}"></script>
+
+<!-- Jquery Plugins, main Jquery -->
+<script src="{% static './assets/js/plugins.js' %}"></script>
+<script src="{% static './assets/js/main.js' %}"></script>
+
+</html>
+{% endblock %}
